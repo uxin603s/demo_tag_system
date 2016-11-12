@@ -1,6 +1,4 @@
-<textarea 
-ng-model="width"
-></textarea>
-<div  style="width:{{width}}px;height:400px;">
-	
-</div>
+<input 
+style="width:600px;"
+type="range" ng-model="width" max="600" min="0"/>{{width}}
+<div  style="width:{{width}}px;height:400px;"></div>

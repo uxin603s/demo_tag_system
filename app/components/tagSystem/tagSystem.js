@@ -29,7 +29,6 @@ angular.module('app',[]).component("tagSystem",{
 				connect:'tagSystem-resize',
 			}
 			postMessageHelper.master(pack,function(res){
-				
 				$scope.resize=res
 				$scope.$apply();
 			})

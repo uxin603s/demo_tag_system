@@ -15,15 +15,26 @@ angular.module('app',[]).component("tagSystem",{
 		// console.dir(iframe)
 		
 		iframe.onload=function(){
+			var source=iframe.contentWindow;
 			var pack={
-				source:iframe.contentWindow,
-				connect:'tagSystem',
+				source:source,
+				connect:'tagSystem-search',
 			}
 			postMessageHelper.master(pack,function(res){
 				console.log(res)
 				$scope.$apply();
 			})
+			var pack={
+				source:source,
+				connect:'tagSystem-resize',
+			}
+			postMessageHelper.master(pack,function(res){
+				
+				$scope.resize=res
+				$scope.$apply();
+			})
 		}
+		
 		
 		
 	}]

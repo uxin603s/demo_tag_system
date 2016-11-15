@@ -16,25 +16,19 @@ angular.module('app',[]).component("tagSystem",{
 		
 		iframe.onload=function(){
 			var source=iframe.contentWindow;
-			var pack={
-				source:source,
-				connect:'tagSystem-search',
-			}
-			postMessageHelper.master(pack,function(res){
-				// console.log(res)
+			
+			postMessageHelper.init("tagSystem-search",source)
+			postMessageHelper.send("tagSystem-search")
+			postMessageHelper.receive("tagSystem-search",function(res){
+				console.log(res)
 				$scope.$apply();
 			})
-			var pack={
-				source:source,
-				connect:'tagSystem-resize',
-			}
-			postMessageHelper.master(pack,function(res){
-				// console.log('resize',res)
+			postMessageHelper.init("tagSystem-resize",source)
+			postMessageHelper.send("tagSystem-resize")
+			postMessageHelper.receive("tagSystem-resize",function(res){
 				$scope.resize=res
 				$scope.$apply();
 			})
-			
-			
 
 		}
 		// postMessageHelper.slave('tagSystem-resize',{

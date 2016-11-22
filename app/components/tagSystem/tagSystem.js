@@ -5,9 +5,9 @@ angular.module('app',[]).component("tagSystem",{
 		$scope.width=500;
 		$scope.search=tagSystem.data.search;
 		$scope.tagList=tagSystem.data.list;
-		$scope.size=tagSystem.data.size;		
+		$scope.size=tagSystem.data.size;
 		$($element).find("iframe_pp").append(tagSystem.iframe);
-		tagSystem.init("../tag_system/public/index.php?tid=1&wid=1&t="+Date.now())
+		tagSystem.init("../tag_system/public/index.php?tid=1&wid=3&t="+Date.now())
 		$scope.list=[
 			{id:1},
 			{id:2},
@@ -17,6 +17,7 @@ angular.module('app',[]).component("tagSystem",{
 		var ids=$scope.list.map(function(val){
 			return val.id
 		})
+		// console.log(ids)
 		tagSystem.getTag(ids)
 		
 		

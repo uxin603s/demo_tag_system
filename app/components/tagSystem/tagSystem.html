@@ -4,8 +4,13 @@ type="range" ng-model="width" max="600" min="0"/>
 <div  style="width:{{width}}px;height:{{size.h}}px;">
 	<iframe_pp></iframe_pp>
 </div>
+{{search}}
+{{editList}}
+<div ng-init="editList={}"></div>
 <div class="col-xs-12" ng-repeat="item in list" >
 	<div class="col-xs-1">{{item.id}}</div>
-	<div class="col-xs-1">{{tagList[item.id]}}</div>
-	<div class="col-xs-1"><input type="text" /></div>
+	<div class="col-xs-1">
+		編輯
+		<input type="checkbox" ng-model="editList[item.id]">
+	</div>
 </div>

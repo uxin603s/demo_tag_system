@@ -43,6 +43,8 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 	
 	
 	var getTag=function(ids){
+		// console.log(postMessageHelper);
+		// console.log(ids);
 		postMessageHelper
 		.send("tagSystem",{name:'getTag',value:ids})
 	}

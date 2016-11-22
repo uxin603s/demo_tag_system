@@ -2,6 +2,7 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 	var data={
 		search:[],
 		list:{},
+		tagList:{},
 		size:{
 			w:0,
 			h:0,
@@ -14,43 +15,49 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 	iframe.setAttribute("scrolling","no");
 	iframe.setAttribute("frameborder",0);
 	var source;
-	iframe.onload=function(){
-		source=iframe.contentWindow;
-		postMessageHelper.init("tagSystem",source)
-		postMessageHelper.send("tagSystem")
-		postMessageHelper.receive("tagSystem",function(res){
-			if(res.name=="search"){
-				data.search.splice(0,data.search.length)
-				for(var i in res.value){
-					data.search.push(res.value[i]);
-				}
-			}else if(res.name=="resize"){
-				data.size.w=res.value.w
-				data.size.h=res.value.h
-			}else if(res.name=="getTag"){
-				for(var i in res.value){
-					data.list[i]=res.value[i];
-				}
-			}
-			$rootScope.$apply();
-		})
-		
-		
-	}
 	var init=function(src){
+		iframe.onload=function(){
+			// console.log('onload')
+			source=iframe.contentWindow;
+			postMessageHelper.init("tagSystem",source)
+			postMessageHelper.send("tagSystem")
+			postMessageHelper.receive("tagSystem",function(res){
+				if(res.name=="search"){
+					data.search.splice(0,data.search.length)
+					for(var i in res.value){
+						data.search[i]=res.value[i];
+					}
+				
+				}else if(res.name=="resize"){
+					data.size.w=res.value.w
+					data.size.h=res.value.h
+				}
+				else if(res.name=="getTag"){
+					// console.log('receive',res.value)
+					for(var i in data.tagList){
+						delete data.tagList[i]
+					}
+					for(var i in res.value){
+						data.tagList[i]=res.value[i];
+					}
+				}
+				$rootScope.$apply();
+			})
+		}
 		iframe.src=src;
 	}
 	
-	
 	var getTag=function(ids){
-		// console.log(postMessageHelper);
-		// console.log(ids);
 		postMessageHelper
-		.send("tagSystem",{name:'getTag',value:ids})
+			.send("tagSystem",{name:'getTag',value:ids})
 	}
+	
 	return {
 		init:init,
-		data:data,
+		
+		size:data.size,
+		search_result:data.search,
+		tagList:data.tagList,
 		iframe:iframe,
 		getTag:getTag,
 	}

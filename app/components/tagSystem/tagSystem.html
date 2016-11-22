@@ -4,9 +4,8 @@ type="range" ng-model="width" max="600" min="0"/>
 <div  style="width:{{width}}px;height:{{size.h}}px;">
 	<iframe_pp></iframe_pp>
 </div>
-<div >
-{{tagList}}
-	<div ng-repeat="item in list" >
-		{{item.id}}
-	</div>
+<div class="col-xs-12" ng-repeat="item in list" >
+	<div class="col-xs-1">{{item.id}}</div>
+	<div class="col-xs-1">{{tagList[item.id]}}</div>
+	<div class="col-xs-1"><input type="text" /></div>
 </div>

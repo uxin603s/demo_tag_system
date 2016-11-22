@@ -7,13 +7,17 @@ angular.module('app',[]).component("tagSystem",{
 		$scope.tagList=tagSystem.data.list;
 		$scope.size=tagSystem.data.size;		
 		$($element).find("iframe_pp").append(tagSystem.iframe);
+		tagSystem.init("../tag_system/public/index.php?tid=1&wid=1&t="+Date.now())
 		$scope.list=[
 			{id:1},
 			{id:2},
 			{id:3},
 			{id:4},
 		]
-		tagSystem.getTag($scope.list.map(function(val){return val.id}))
+		var ids=$scope.list.map(function(val){
+			return val.id
+		})
+		tagSystem.getTag(ids)
 		
 		
 		

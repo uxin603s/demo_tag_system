@@ -28,30 +28,28 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 				data.size.w=res.value.w
 				data.size.h=res.value.h
 			}else if(res.name=="getTag"){
-				data.list=res.value
+				for(var i in res.value){
+					data.list[i]=res.value[i];
+				}
 			}
 			$rootScope.$apply();
 		})
 		
 		
 	}
-	
-	iframe.src="../tag_system/public/index.php?tid=1&wid=3&t="+Date.now();
-	var get_source=function(callback){
-		var timer=setInterval(function(){
-			if(source){
-				callback && callback(source);
-				clearTimeout(timer);
-			}
-		},500)
+	var init=function(src){
+		iframe.src=src;
 	}
+	
+	
 	var getTag=function(ids){
-		postMessageHelper.send("tagSystem",{name:'getTag',value:ids})
+		postMessageHelper
+		.send("tagSystem",{name:'getTag',value:ids})
 	}
 	return {
+		init:init,
 		data:data,
 		iframe:iframe,
-		get_source:get_source,
 		getTag:getTag,
 	}
 }])

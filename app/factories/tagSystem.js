@@ -19,7 +19,6 @@ angular.module('app')
 	var source;
 	var init=function(src){
 		iframe.onload=function(){
-			// console.log('onload')
 			source=iframe.contentWindow;
 			postMessageHelper.init("tagSystem",source)
 			postMessageHelper.send("tagSystem")

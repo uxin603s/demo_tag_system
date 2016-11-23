@@ -8,6 +8,7 @@
 		<script src="app/app.js?t=<?=time()?>"></script>
 		
 		
+		<script src="app/directives/ngEnter/ngEnter.js?t=<?=time()?>"></script>
 		<script src="app/components/fakeList/fakeList.js?t=<?=time()?>"></script>
 		<script src="app/components/tagSystem/tagSystem.js?t=<?=time()?>"></script>
 		

@@ -1,16 +1,24 @@
-<div class="col-xs-4" >
+<div class="col-xs-6" >
 	<div class="col-xs-12 bottom_line" ng-init="cache.edit_id || (cache.edit_id={})">
 		使用標籤搜尋<input type="checkbox" ng-model="cache.tagSearch" />
 	</div>
 	
 	<div class="col-xs-12  bottom_line" ng-repeat="item in list" >
 		<div class="col-xs-1">{{item.id}}</div>
-		<div class="col-xs-6">
-			<button 
-			ng-repeat="item in tagSystem.tagList[item.id]">
-			{{item.name}}</button>
+		<div class="col-xs-3">
+			<input 
+			type="text" 
+			ng-model="tag.name"
+			ng-enter="addTag(item.id,tag)" 
+			/>
 		</div>
-		<div class="col-xs-1">
+		<div class="col-xs-4">
+			<button 
+			ng-click="delTag(item.id,$index)"
+			ng-repeat="tag_name in tagSystem.tagList[item.id]">
+			{{tag_name}}</button>
+		</div>
+		<div class="col-xs-2">
 			編輯
 			<input type="checkbox" ng-model="cache.edit_id[item.id]">
 		</div>

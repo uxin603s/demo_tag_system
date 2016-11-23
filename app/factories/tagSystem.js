@@ -1,8 +1,10 @@
-angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
+angular.module('app')
+.factory('tagSystem',['$rootScope',function($rootScope){
 	var data={
 		search:[],
 		list:{},
 		tagList:{},
+		addTag:[],
 		size:{
 			w:0,
 			h:0,
@@ -33,12 +35,16 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 					data.size.h=res.value.h
 				}
 				else if(res.name=="getTag"){
-					// console.log('receive',res.value)
 					for(var i in data.tagList){
 						delete data.tagList[i]
 					}
 					for(var i in res.value){
 						data.tagList[i]=res.value[i];
+					}
+				}else if(res.name=="selectTag"){
+					for(var i in data.selectIds){
+						var id=data.selectIds[i];
+						data.addTag(id,{name:res.value})
 					}
 				}
 				$rootScope.$apply();
@@ -47,18 +53,34 @@ angular.module('app').factory('tagSystem',['$rootScope',function($rootScope){
 		iframe.src=src;
 	}
 	
+	var addTag=function(id,name){
+		postMessageHelper
+			.send("tagSystem",{name:'addTag',value:{id:id,name:name}})
+	}
+	var delTag=function(id,index){
+		postMessageHelper
+			.send("tagSystem",{name:'delTag',value:{id:id,index:index}})
+	}
 	var getTag=function(ids){
 		postMessageHelper
 			.send("tagSystem",{name:'getTag',value:ids})
 	}
-	
+
+	var set=function(name,value){
+		data[name]=value;
+	}
 	return {
 		init:init,
-		
+		set:set,
 		size:data.size,
 		search_result:data.search,
 		tagList:data.tagList,
-		iframe:iframe,
+		addTag:addTag,
+		delTag:delTag,
+		
 		getTag:getTag,
+		
+		iframe:iframe,
+		
 	}
 }])

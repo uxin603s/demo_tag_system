@@ -34,6 +34,7 @@ angular.module('app')
 					data.size.h=res.value.h
 				}
 				else if(res.name=="getTag"){
+					console.log(res.value)
 					for(var i in data.tagList){
 						delete data.tagList[i]
 					}

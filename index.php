@@ -21,7 +21,11 @@
 
 	</head>
 	<body ng-app="app" class="container-fluid"  >
-		<tag-system ></tag-system>	
-		<fake-list></fake-list>
+		<tag-system 
+		ng-if="!not_finish_flag"
+		></tag-system>	
+		<fake-list 
+		ng-if="!not_finish_flag"
+		></fake-list>
 	</body>
 </html>

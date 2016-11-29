@@ -14,7 +14,7 @@ angular.module('app')
 	iframe.style="width:100%;height:100%;"
 	iframe.setAttribute("marginwidth",0);
 	iframe.setAttribute("marginheight",0);
-	iframe.setAttribute("scrolling","no");
+	// iframe.setAttribute("scrolling","no");
 	iframe.setAttribute("frameborder",0);
 	var source;
 	var init=function(src){
@@ -24,6 +24,7 @@ angular.module('app')
 			postMessageHelper.send("tagSystem")
 			postMessageHelper.receive("tagSystem",function(res){
 				if(res.name=="resize"){
+					// console.log(res)
 					data.size.w=res.value.w
 					data.size.h=res.value.h
 				}
@@ -42,5 +43,6 @@ angular.module('app')
 	return {
 		init:init,
 		iframe:iframe,
+		size:data.size,
 	}
 }])

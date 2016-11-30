@@ -22,10 +22,11 @@
 	</head>
 	<body ng-app="app" class="container-fluid"  >
 		<tag-system 
-		ng-if="!not_finish_flag"
+		ng-if="!cache.not_finish_flag"
 		></tag-system>	
-		<fake-list 
-		ng-if="!not_finish_flag"
+		
+		<fake-list
+		ng-if="!cache.not_finish_flag"
 		></fake-list>
 	</body>
 </html>

@@ -1,28 +1,40 @@
 <div class="col-xs-6" >
 	<div class="col-xs-12 bottom_line" ng-init="cache.edit_id || (cache.edit_id={})">
-		使用標籤搜尋<input type="checkbox" ng-model="cache.tagSearch" />
+		模式
+		<button 
+		ng-click="cache.mode=!cache.mode"
+		ng-class="!cache.mode?'btn-danger':'btn-primary'"
+		class="btn btn-sm"
+		>搜尋</button>
+		<button 
+		ng-click="cache.mode=!cache.mode" 
+		ng-class="cache.mode?'btn-danger':'btn-primary'"
+		class="btn btn-sm"
+		>新增</button>
 	</div>
-	
+	<div ng-if="!cache.mode">
+		搜尋<input 
+		type="text" 
+		ng-model="tag.name"
+		ng-enter="search.add(tag)" 
+		/>
+		<button 
+		ng-click="search.del($index)"
+		ng-repeat="item in search.list">
+		{{item}}</button>
+	</div>
 	<div class="col-xs-12  bottom_line" ng-repeat="item in list" >
 		<div class="col-xs-1">{{item.id}}</div>
-		<div class="col-xs-3">
-			<input 
-			type="text" 
-			ng-model="tag.name"
-			ng-enter="addTag(item.id,tag)" 
-			/>
-		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-1">{{item.title}}</div>
 		
-			<button 
-			
-			ng-click="delTag(item.id,$index)"
-			ng-repeat="tag_name in tagSystem.tagList[item.id]">
-			{{tag_name}}</button>
-		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-6" ng-if="cache.mode">
 			編輯
-			<input type="checkbox" ng-model="cache.edit_id[item.id]">
+			<input 
+			type="checkbox" ng-model="item.insert_flag">
+			<button 
+			ng-repeat="item in tagSystem.tagList[item.id]"
+			class="btn btn-sm btn-primary"
+			>{{item}}</button>
 		</div>
 	</div>
 </div>

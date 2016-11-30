@@ -25,5 +25,6 @@ angular.module('app')
 			localforage.setItem(location.pathname+"cache",angular.copy(cache));
 		},500)
 	});
+	$rootScope.__proto__.cache=cache.data;
 	return cache.data;
 }])

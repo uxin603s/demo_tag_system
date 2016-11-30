@@ -26,6 +26,9 @@ angular.module('app')
 				if(res.name=="idSearchTag"){
 					data.tagList=res.value;
 				}
+				if(res.name=="insert"){
+					data.insert=res.value
+				}
 				$rootScope.$apply();
 			})
 		}
@@ -43,6 +46,10 @@ angular.module('app')
 		postMessageHelper
 			.send("tagSystem",{name:'idSearchTag',value:value})
 	}
+	var idSearchSelect=function(value){
+		postMessageHelper
+			.send("tagSystem",{name:'idSearchSelect',value:value})
+	}
 	
 
 	
@@ -55,5 +62,6 @@ angular.module('app')
 		setMode:setMode,
 		tagSearchId:tagSearchId,
 		idSearchTag:idSearchTag,
+		idSearchSelect:idSearchSelect,
 	}
 }])

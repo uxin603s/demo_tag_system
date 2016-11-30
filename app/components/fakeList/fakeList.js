@@ -3,14 +3,14 @@ bindings:{},
 templateUrl:'app/components/fakeList/fakeList.html?t='+Date.now(),
 controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 	cache.search || (cache.search=[]);
-	$scope.$watch("cache.mode",function(value){
-		tagSystem.setMode(value);
-	});
-	$scope.$watch("cache.search",function(value){
-		tagSystem.tagSearchId(value);
-	},1);
 	$scope.tagSystem=tagSystem.data;
-	
+	$scope.$watch("tagSystem.insert",function(value){
+		if(!value)return;
+		// console.log(value)
+		
+		delete tagSystem.data.insert;
+	},1)
+	$scope.list=[];
 	$scope.search={
 		list:cache.search,
 		add:function(tag){
@@ -24,8 +24,6 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 			this.list.splice(index,1);
 		},
 	}
-	
-	$scope.list=[];
 	$scope.get=function(){
 		clearTimeout($scope.getTimer);
 		$scope.getTimer=setTimeout(function(){
@@ -38,8 +36,28 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 			$scope.list=list;
 			tagSystem.idSearchTag(angular.copy(list));
 			$scope.$apply();
-		},0)
+		},0);
 	}
-	$scope.get();	
+	$scope.$watch("cache.mode",function(value){
+		tagSystem.setMode(value);
+		$scope.get();
+	});
+	$scope.$watch("cache.search",function(value){
+		tagSystem.tagSearchId(value);
+	},1);
+	
+	
+	
+	$scope.$watch("list",function(list){
+		var result=[];
+		for(var i in list){
+			if(list[i].insert_flag){
+				result.push(list[i].id)
+			}
+		}
+		tagSystem.idSearchSelect(result);
+	},1)
+	
+	
 }]
 })

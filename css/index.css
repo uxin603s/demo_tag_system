@@ -3,8 +3,6 @@
 }
 .bottom_line{
 	border-bottom: 1px solid #c6c6c6;
-	!padding-bottom:5px;
-	!margin-bottom:5px;
 }
 .odd>div:nth-child(odd){
 	background:#eee;
@@ -14,4 +12,12 @@
 }
 .odd div,.even div{
 	height:100%;
+}
+.odd div::before,.even div::before{
+	content:'';
+	width:0;
+	height:100%;
+	display:inline-block;
+	position:relative;
+	vertical-align:middle;
 }

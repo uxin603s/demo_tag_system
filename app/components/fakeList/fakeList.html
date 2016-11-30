@@ -54,15 +54,18 @@
 		</div>
 		<div class="col-xs-2" >
 			<input 
+			ng-enter="add(item.id,tag)"
+			ng-model="tag.name"
 			style="width:80%;"
 			ng-if="cache.mode"
 			type="text" />
 		</div>
 		<div class="col-xs-4 text-left">
 			<button 
-			ng-repeat="item in tagSystem.tagList[item.id]"
+			ng-click="del(item.id,$index)"
+			ng-repeat="tag_name in tagSystem.tagList[item.id]"
 			class="btn btn-sm btn-primary"
-			>{{item}}</button>
+			>{{tag_name}}</button>
 		</div>
 	</div>
 </div>

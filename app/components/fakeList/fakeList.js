@@ -6,7 +6,7 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 	$scope.tagSystem=tagSystem.data;
 	$scope.$watch("tagSystem.insert",function(value){
 		if(!value)return;
-		// console.log(value)
+		console.log(value)
 		
 		delete tagSystem.data.insert;
 	},1)
@@ -57,7 +57,8 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 		}
 		tagSystem.idSearchSelect(result);
 	},1)
-	
+	$scope.add=tagSystem.addIdRelation;
+	$scope.del=tagSystem.delIdRelation;
 	
 }]
 })

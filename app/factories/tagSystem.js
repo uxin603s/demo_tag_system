@@ -50,9 +50,15 @@ angular.module('app')
 		postMessageHelper
 			.send("tagSystem",{name:'idSearchSelect',value:value})
 	}
-	
-
-	
+	var addIdRelation=function(id,tag){
+		postMessageHelper
+			.send("tagSystem",{name:'addIdRelation',value:{id:id,name:tag.name}})
+		tag.name='';
+	}
+	var delIdRelation=function(id,index){
+		postMessageHelper
+			.send("tagSystem",{name:'delIdRelation',value:{id:id,index:index}})
+	}
 
 	
 	return {
@@ -63,5 +69,7 @@ angular.module('app')
 		tagSearchId:tagSearchId,
 		idSearchTag:idSearchTag,
 		idSearchSelect:idSearchSelect,
+		addIdRelation:addIdRelation,
+		delIdRelation:delIdRelation,
 	}
 }])

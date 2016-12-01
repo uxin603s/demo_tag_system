@@ -4,7 +4,9 @@ angular.module('app')
 		size:{
 			w:0,
 			h:0,
-		}
+		},
+		idList:[],
+		tagList:{},
 	}
 	var iframe=document.createElement("iframe");
 	iframe.style="width:100%;height:100%;"
@@ -27,12 +29,13 @@ angular.module('app')
 						data.size.h=res.value.h
 					}
 					if(res.name=="idSearchTag"){
-						
-							data.tagList=res.value;
-						
+						data.tagList=res.value;
 					}
 					if(res.name=="insert"){
 						data.insert=res.value
+					}
+					if(res.name=="tagSearchId"){
+						data.idList=res.value
 					}
 					$rootScope.$apply();
 				},0)

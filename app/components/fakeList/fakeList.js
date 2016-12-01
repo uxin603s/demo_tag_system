@@ -33,7 +33,14 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 				{id:3,title:'ggyt'},
 				{id:4,title:'bbds'},
 			];
-			$scope.list=list;
+			if(cache.mode){
+				$scope.list=list;
+			}else{
+				$scope.list=list.filter(function(val){
+					return $scope.tagSystem.idList.indexOf(val.id)!=-1
+				})
+			}
+			
 			tagSystem.idSearchTag(angular.copy(list));
 			$scope.$apply();
 		},0);
@@ -45,7 +52,11 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 	$scope.$watch("cache.search",function(value){
 		tagSystem.tagSearchId(value);
 	},1);
-		
+	
+	$scope.$watch("tagSystem.idList",function(idList){
+		$scope.get();
+	},1)
+	
 	$scope.$watch("list",function(list){
 		var result=[];
 		for(var i in list){

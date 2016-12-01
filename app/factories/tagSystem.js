@@ -68,7 +68,10 @@ angular.module('app')
 		postMessageHelper
 			.send("tagSystem",{name:'delIdRelation',value:{id:id,index:index}})
 	}
-
+	var chIdRelation=function(id,a,b){
+		postMessageHelper
+			.send("tagSystem",{name:'chIdRelation',value:{id:id,a:a,b:b}})
+	}
 	
 	return {
 		init:init,
@@ -80,5 +83,6 @@ angular.module('app')
 		idSearchSelect:idSearchSelect,
 		addIdRelation:addIdRelation,
 		delIdRelation:delIdRelation,
+		chIdRelation:chIdRelation,
 	}
 }])

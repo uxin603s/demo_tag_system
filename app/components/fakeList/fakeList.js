@@ -68,6 +68,22 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 	},1)
 	$scope.add=tagSystem.addIdRelation;
 	$scope.del=tagSystem.delIdRelation;
-	
+	$scope.$watch("tagSystem.tagList",function(curr,prev){
+		
+		for(var i in curr){
+			if(prev[i])
+			if(!angular.equals(curr[i],prev[i])){
+				var result=[];
+				for(var j in curr[i]){
+					if(!angular.equals(curr[i][j],prev[i][j])){
+						result.push(j)
+					}
+				}
+				if(result.length==2){
+					tagSystem.chIdRelation(i,result[0],result[1])
+				}
+			}
+		}
+	},1)
 }]
 })

@@ -63,7 +63,11 @@
 		</div>
 		<div class="col-xs-4 text-left">
 			<button 
-			ng-click="del(item.id,$index)"
+			sortable="tagSystem.tagList[item.id]"
+			index="$index"
+			draggable="true"
+			
+			ng-right-click="del(item.id,$index)"
 			ng-repeat="tag_name in tagSystem.tagList[item.id]"
 			class="btn btn-sm btn-primary"
 			>{{tag_name}}</button>

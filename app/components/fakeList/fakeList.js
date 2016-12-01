@@ -45,9 +45,7 @@ controller:["$scope","tagSystem","cache",function($scope,tagSystem,cache){
 	$scope.$watch("cache.search",function(value){
 		tagSystem.tagSearchId(value);
 	},1);
-	
-	
-	
+		
 	$scope.$watch("list",function(list){
 		var result=[];
 		for(var i in list){

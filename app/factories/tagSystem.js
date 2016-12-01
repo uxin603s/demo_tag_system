@@ -13,23 +13,29 @@ angular.module('app')
 	iframe.setAttribute("scrolling","no");
 	iframe.setAttribute("frameborder",0);
 	var source;
+	var timer={};
 	var init=function(src){
 		iframe.onload=function(){
 			source=iframe.contentWindow;
 			postMessageHelper.init("tagSystem",source)
 			postMessageHelper.send("tagSystem")
 			postMessageHelper.receive("tagSystem",function(res){
-				if(res.name=="resize"){
-					data.size.w=res.value.w
-					data.size.h=res.value.h
-				}
-				if(res.name=="idSearchTag"){
-					data.tagList=res.value;
-				}
-				if(res.name=="insert"){
-					data.insert=res.value
-				}
-				$rootScope.$apply();
+				clearTimeout(timer[res.name])
+					timer[res.name]=setTimeout(function(){
+					if(res.name=="resize"){
+						data.size.w=res.value.w
+						data.size.h=res.value.h
+					}
+					if(res.name=="idSearchTag"){
+						
+							data.tagList=res.value;
+						
+					}
+					if(res.name=="insert"){
+						data.insert=res.value
+					}
+					$rootScope.$apply();
+				},0)
 			})
 		}
 		iframe.src=src;

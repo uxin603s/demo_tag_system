@@ -10,6 +10,6 @@ angular.module('app').component("tagSystem",{
 				.append(tagSystem.iframe);
 				
 		tagSystem
-			.init("../tag_system_front/index.php?t="+Date.now())
+			.init("../tag_system_front/index.php?wid=1&t="+Date.now())
 	}]
 })
